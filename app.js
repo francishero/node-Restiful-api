@@ -13,8 +13,8 @@ const port=process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-
-const bookRouter=require('./Routes/bookRouter');
+//from the Routes dir
+const bookRouter=require('./Routes/bookRouter')(Book);
 
 
 app.use('/api',bookRouter);

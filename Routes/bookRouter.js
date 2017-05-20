@@ -1,7 +1,7 @@
 
 const express=require('express');
 const bookRouter=express.Router();
-const routes=()=>{
+const routes=(Book)=>{
   
   bookRouter.route('/Books')
 //we let the users add a new Book using the post verb
@@ -24,7 +24,7 @@ const routes=()=>{
             //pull the books from the db 
             Book.find(query,(err,books)=>{
               if(err)
-                console.log(err);
+                res.status(500).send(err);
               res.json(books);
             });
           });
@@ -36,7 +36,25 @@ const routes=()=>{
                   res.status(500).send(err);
                 res.json(book);
               });
-            });
+            })
+            .put((req,res)=>{
+              //put will just replce an existing item
+              Book.findById(req.params.bookId,(err,book)=>{
+                if(err)
+                  res.status(500).send(err);
+                  else
+                  {
+                    title=req.body.title;
+                    genre=req.body.genre;
+                    author=req.body.author;
+                    read=req.body.read;
+                    //save the new book to db 
+                    book.save();
+                    res.json(book);
+                  }
+              })
+            })
+      
 
             return bookRouter;
 }
