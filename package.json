@@ -1,0 +1,11 @@
+{
+  "name": "restiful-api-node",
+  "version": "1.0.0",
+  "description": "Learning the basics of restiful api using nodejs and express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Francis Miyoba",
+  "license": "MIT"
+}
