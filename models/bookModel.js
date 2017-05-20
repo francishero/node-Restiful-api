@@ -1,15 +1,15 @@
 //here we define a json object that lays out how a book looks like
 
 const mongoose=require('mongoose'),
-      schema=mongoose.schema();
-const bookModel=new schema({
+      Schema=mongoose.Schema;
+const bookModel=new Schema({
   title:{
-    type:string
+    type:String
   },
-  author:{type:string},
-  genre:{type:string},
-  read:{type:boolean,default:false}
+  author:{type:String},
+  genre:{type:String},
+  read:{type:Boolean,default:false}
 });
 
-//we have a new schema called book so we export
-module.exports=mongoose.model('book',bookModel);
+//we have a new schema called Book so we export
+module.exports=mongoose.model('Book',bookModel);

@@ -11,8 +11,19 @@ const port=process.env.PORT || 3000;
 const bookRouter=express.Router();
 bookRouter.route('/Books')
           .get((req,res)=>{
-            let responseJson={Hello:"this is my api"};
-            res.json(responseJson);
+
+            //filter with query string
+            let query={};
+            if(req.query.genre)
+            {
+              query.genre=req.query.genre;
+            }
+            //pull the books from the db 
+            Book.find((err,books)=>{
+              if(err)
+                console.log(err);
+              res.json(books);
+            })
           });
 
 app.use('/api',bookRouter);
