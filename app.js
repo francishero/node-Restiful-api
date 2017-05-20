@@ -19,12 +19,21 @@ bookRouter.route('/Books')
               query.genre=req.query.genre;
             }
             //pull the books from the db 
-            Book.find((err,books)=>{
+            Book.find(query,(err,books)=>{
               if(err)
                 console.log(err);
               res.json(books);
-            })
+            });
           });
+
+  bookRouter.route('/Books/:bookId')
+            .get((req,res)=>{
+              Book.findById(req.params.bookId,(err,book)=>{
+                if(err)
+                  res.status(500).send(err);
+                res.json(book);
+              });
+            });
 
 app.use('/api',bookRouter);
 
