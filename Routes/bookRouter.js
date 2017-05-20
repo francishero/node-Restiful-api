@@ -73,17 +73,23 @@ bookRouter.use('/:bookId',(req,res)=>{
                 delete req.body._id;
               else{
                 for(var p in req.body)
-                {
                   req.book[p]=req.body[p];//update the book 
-                }
+                
               }
               //save the updated book
               req.book.save((err)=>{
                 if(err)
                 res.status(500).send(err);
-                
+
                  res.json(req.book);
                   
+              })
+            })
+            .delete((req,res)=>{
+              req.book.remove((err)=>{
+                if(err)
+                  res.status(500).send(err)
+                res.status(204).send('removed');
               })
             })
       
