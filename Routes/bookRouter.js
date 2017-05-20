@@ -59,8 +59,32 @@ bookRouter.use('/:bookId',(req,res)=>{
               req.book.author=req.body.author;
               req.book.read=req.body.author;
 
-              req.book.save();
-              res.json(req.book);
+              req.book.save((err)=>{
+                if(err)
+                  res.status(500).send(err);
+                res.json(req.book);
+              })
+              
+            })
+            .patch((req,res)=>{
+              //update the book 
+              //we dont want to update the _id
+              if(req.body._id)
+                delete req.body._id;
+              else{
+                for(var p in req.body)
+                {
+                  req.book[p]=req.body[p];//update the book 
+                }
+              }
+              //save the updated book
+              req.book.save((err)=>{
+                if(err)
+                res.status(500).send(err);
+                
+                 res.json(req.book);
+                  
+              })
             })
       
 
