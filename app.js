@@ -1,5 +1,9 @@
 
-const express=require('express');
+const express=require('express'),
+      mongoose=require('mongoose');
+
+const db=mongoose.connect('mongodb://localhost/bookAPI');
+const book=require('./models/bookModel');
 
 const app=express();
 const port=process.env.PORT || 3000;
